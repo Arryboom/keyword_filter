@@ -1,4 +1,4 @@
-#Keyword Filter
+# Keyword Filter
 
 a simple nonsense sentence filter for chinese,gonna filter out low infomation sentence or sentence that contains too much personal emotional express.
 
@@ -15,7 +15,7 @@ python3.8 with FastAPI and jieba
 
 
 
-###Running
+### Running
 
 
 1.install necessary python module:
@@ -31,7 +31,7 @@ uvicorn main:app --reload --port 61111
 >if you deploy it on your webserver,it will be http://yourdomain/
 >it's not recommend to deploy this project to public webserver directly,it may contains some security related problem at this version(like xss).
 
-###Main webpage
+### Main webpage
 
 - submit new keyword
 
@@ -48,7 +48,7 @@ uvicorn main:app --reload --port 61111
 ![](/img/3.png)
 
 
-###API
+### API
 
 backend was simple since current it's only support black list keyword filter and some simple format filter.
 
@@ -61,7 +61,7 @@ should able to see something like below:
 
 
 
-###tips
+### tips
 
 - backup
 the word.db in your main folder is the sqlite db file that actually save your custom keywords,remember to backup it when you need redeploy or upgrade.
