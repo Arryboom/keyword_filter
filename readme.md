@@ -66,7 +66,11 @@ should able to see something like below:
 - backup
 the word.db in your main folder is the sqlite db file that actually save your custom keywords,remember to backup it when you need redeploy or upgrade.
 
-
-
+- API port modify
+if you change the backend service running port or domain,simple edit \html\assets\js\script.min.js
+```
+var apiurl="http://127.0.0.1:61111"
+```
+to your new api url location to make it work.
 
 
