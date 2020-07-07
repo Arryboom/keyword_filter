@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Keyword</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css?h=57f4bb9132aa82941c6992046f143312">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css?h=2c0fc24b3d3038317dc51c05339856d0">
+    <link rel="stylesheet" href="assets/fonts/material-icons.min.css?h=2c0fc24b3d3038317dc51c05339856d0">
+    <link rel="stylesheet" href="assets/css/styles.min.css?h=569fdf2bdce76f64a3784dbd4b62c00a">
+<meta http-equiv="Access-Control-Allow-Origin" content="*" />
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-md" id="app-navbar">
+        <div class="container-fluid"><a class="navbar-brand" href="#"><i class="icon ion-ios-color-filter" id="brand-logo" onclick="window.location.reload()"></i></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div
+                class="collapse navbar-collapse" id="navcol-1">
+                <h1 onclick="window.location.reload()">KeyWordFilter</h1>
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="#tab-1" role="tab" data-toggle="tab">提交新词</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" id="check_dict" href="#tab-2" role="tab" data-toggle="tab">查看词库</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#tab-3" role="tab" data-toggle="tab">过滤检测</a></li>
+                </ul>
+        </div>
+        </div>
+    </nav>
+    <div>
+        <ul class="nav nav-tabs invisible">
+            <li class="nav-item"><a class="nav-link active" role="tab" data-toggle="tab" href="#tab-1">Tab 1</a></li>
+            <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#tab-2">Tab 2</a></li>
+            <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#tab-3">Tab 3</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active text-center" role="tabpanel" id="tab-1">
+                <div class="text-left" style="padding-left: 10%;"><button class="btn btn-info" type="button" disabled="">添加关键词：</button></div>
+                <div style="padding-bottom: 5%;">
+                    <div class="text-left"></div>
+                    <div class="d-inline-flex"><input type="text" id="keyword_input" name="keyword" placeholder="put your keyword here." autofocus="" required="" minlength="1" maxlength="255" style="min-width: 500px;">
+                        <div style="padding-left: 5px;"><button class="btn btn-primary" id="submit_keyword_btn" type="button">添加</button></div>
+                    </div>
+                </div>
+                <div class="text-left" style="padding-left: 10%;padding-bottom: 1%;"><button class="btn btn-info" type="button" disabled="">在此输入欲提取屏蔽词文本：</button></div>
+                <div style="padding-bottom: 30px;">
+                    <div class="text-left"></div><textarea id="need_split_textarea" style="min-width: 800px;"></textarea>
+                    <div><button class="btn btn-primary" id="split_word_btn" type="button">提取</button></div>
+                </div>
+                <div class="container">
+                    <div class="row" id="keywds_row"></div>
+                </div>
+            </div>
+            <div class="tab-pane" role="tabpanel" id="tab-2">
+                <div id="table_div1"><table id="tb_1" data-response-handler="table1_responseHandler"></table></div>
+            </div>
+            <div class="tab-pane" role="tabpanel" id="tab-3">
+                <div style="padding-left: 10%;padding-bottom: 1%;"><button class="btn btn-info" type="button" disabled="">在此输入欲检测文本：</button></div>
+                <div class="text-center">
+                    <div><textarea class="form-control-lg" id="need_test_text" rows="3" style="min-width: 800px;" placeholder="input the sentence you wanna check here."></textarea></div>
+                    <div class="d-inline-flex" style="padding-left: 15%;"><button class="btn btn-primary" id="need_test_btn" type="button">检查</button>
+                        <div class="d-xl-flex align-items-xl-end"><span style="padding-left: 180px;"></span>
+                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1" checked=""><label class="form-check-label" for="formCheck-1">识别换行符</label></div>
+                        </div>
+                    </div>
+                    <div class="text-left" style="padding-left: 10%;"><button class="btn btn-info" type="button" disabled="">检测结果：</button></div>
+                    <div style="padding-top: 5px;">
+                        <div class="container">
+                            <div id="textcheck_result" contenteditable="true" style="border-style:solid; border-width:1px; border-color:#000"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="toast fade hide" role="alert" data-delay="1000" id="toast_tip_ok" style="position: absolute;top: 78px;right: 5px;min-width: 300px;">
+        <div class="toast-header" style="background-color: rgb(204,204,204);"><i class="material-icons" style="color: rgb(34,198,7);">done</i><strong class="mr-auto" style="color: rgb(34,198,7);">Success!</strong><small>just now</small><button class="close ml-2 mb-1 close" data-dismiss="toast"><span aria-hidden="true">×</span></button></div>
+        <div
+            class="toast-body" role="alert">
+            <p class="text-right">Over!</p>
+    </div>
+    </div>
+    <div class="toast fade hide" role="alert" data-delay="1000" id="toast_tip_error" style="position: absolute;top: 78px;right: 5px;min-width: 300px;">
+        <div class="toast-header" style="background-color: rgb(204,204,204);"><i class="material-icons" style="color: rgb(238,43,31);">clear</i><strong class="mr-auto" style="color: rgb(238,43,31);">ERROR</strong><small>just now</small><button class="close ml-2 mb-1 close" data-dismiss="toast"><span aria-hidden="true">×</span></button></div>
+        <div
+            class="toast-body" role="alert">
+            <p class="text-right">Failed.</p>
+    </div>
+    </div>
+    <script src="assets/js/jquery.min.js?h=89312d34339dcd686309fe284b3f226f"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js?h=7c038681746a729e2fff9520a575e78c"></script>
+    <script src="assets/js/script.min.js?h=2bfa3eb976834bf6b8e9c007aa68d0d3"></script>
+</body>
+
+</html>
