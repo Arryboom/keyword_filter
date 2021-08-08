@@ -1,10 +1,10 @@
 # Keyword Filter
 
-a simple nonsense sentence filter for chinese,gonna filter out low infomation sentence or sentence that contains too much personal emotional express.
+a simple nonsense sentence filter for chinese,gonna filter out low information sentence or sentence that contains too much personal emotional express.
 
-Junk news/articles etc is wasting people's life and deal no good to our health,let's limit these shits togther.
+Junk news/articles etc is wasting people's life and dealing no good to our health,let's limit these shits togther.
 
-- CurrentVersion:**1.5**
+- CurrentVersion:**1.6**
 
 >Front webpage:
 bootstrap+jquery+h5
