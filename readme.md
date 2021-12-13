@@ -75,7 +75,7 @@ var apiurl="http://127.0.0.1:61111"
 to your new api url location to make it work.
 
 
-###example
+### example
 
 to work with baidu search result filter,use this tampermonkey script (change the line var ```baseapiurl="https://1.1.1.1/"``` to your host,for current browser,you need a valid ssl certificate too,if you running in local you can generate a certificate yourself and trust it)
 
