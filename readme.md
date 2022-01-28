@@ -2,7 +2,7 @@
 
 a simple nonsense sentence filter for chinese,gonna filter out low quality information sentence such as sentence that contains too much personal emotional express.
 
-Junk news/articles etc is wasting people's life and dealing no good to our health,let's limit these shits togther.
+Junk news/articles etc is wasting people's life and dealing no good to our health,let's limit these shits get showed togther.
 
 - CurrentVersion:**1.6**
 
