@@ -84,7 +84,7 @@ to work with baidu search result filter,use this tampermonkey script (change the
 // @name         百度杀手
 // @name:en      Baidu_killer
 // @namespace    http://tampermonkey.net/
-// @version      0.27
+// @version      0.29
 // @description  自动屏蔽垃圾搜索结果
 // @description:en  Auto Remove all-All-ALL junks on baidu.
 // @require https://cdn.staticfile.org/jquery/2.0.3/jquery.min.js
@@ -94,151 +94,94 @@ to work with baidu search result filter,use this tampermonkey script (change the
 // @run-at document-idle
 // ==/UserScript==
 
+
 (function() {
-	///
-    ///var baseapiurl="https://1.1.1.1/api/"
-	var baseapiurl="https://1.1.1.1/"
-	///var baseapiurl="https://yourhost.com/api/"
+        var baseapiurl="https://1.1.1.1/";
 
 
 var get_page_tittle=function(){
 var result_db=new Array();
-//$(".result").filter(".c-container").each(function(){console.log($(this).children("h3").children("a").text())})
 $(".result").filter(".c-container").each(function(){
-	result=new Object();
-	result.tittle=$(this).children("h3").children("a").text();
-	result.id=$(this).attr("id");
-	//id=$(this).attr("id");
-	result_db.push(result);
-	req=new Object();
-	req.text=result.tittle;
-	///
-	ajaxcheck(req,result.id);
-////
-	delete result;
-	delete req;
-	delete id
-	});
+        result=new Object();
+        result.tittle=$(this).children("h3").children("a").text();
+        result.id=$(this).attr("id");
+        result_db.push(result);
+        req=new Object();
+        req.text=result.tittle;
+        ajaxcheck(req,result.id);
+        delete result;
+        delete req;
+        delete id
+        });
 return result_db;
 }
 
 var del_result=function(theid){
-	//console.log(theid+"removed");
-	//$(".result.c-container").filter("#11").remove()
-	$(".result.c-container").filter("#"+theid).remove();
+        $(".result.c-container").filter("#"+theid).remove();
 }
 
 var check_remove=function(res,theid){
-	//console.log(theid);
-	if (res.toLowerCase()=="true"){
-		del_result(theid);
-	}
+        if (res.toLowerCase()=="true"){
+                del_result(theid);
+        }
 }
 
-/* theajax=function(){
-    $(function(){
-        //请求参数
-        var list = {};
-        //
-        $.ajax({
-            //请求方式
-            type : "POST",
-            //请求的媒体类型
-            contentType: "application/json;charset=UTF-8",
-            //请求地址
-            url : "http://127.0.0.1/admin/list/",
-            //数据，json字符串
-            data : JSON.stringify(list),
-            //请求成功
-            success : function(result) {
-                console.log(result);
-            },
-            //请求失败，包含具体的错误信息
-            error : function(e){
+var ajaxcheck=function(req,id){
+                $.ajax({
+        type : "POST",
+        contentType: "application/json;charset=UTF-8",
+        url : baseapiurl+"checkjunk/",
+        data : JSON.stringify(req),
+        success : function(res) {
+                check_remove(res,id);
+        },
+        error : function(e){
                 console.log(e.status);
                 console.log(e.responseText);
-            }
-        });
-    });
-} */
-var ajaxcheck=function(req,id){
-		$.ajax({
-	//请求方式
-	type : "POST",
-	//请求的媒体类型
-	contentType: "application/json;charset=UTF-8",
-	//请求地址
-	url : baseapiurl+"checkjunk/",
-	//数据，json字符串
-	data : JSON.stringify(req),
-	//请求成功
-	success : function(res) {
-		check_remove(res,id);
-	},
-	//请求失败，包含具体的错误信息
-	error : function(e){
-		console.log(e.status);
-		console.log(e.responseText);
-	}
+        }
 });
 }
 
 
 var search_rec_ajaxcheck=function(req,ztext){
-		$.ajax({
-	//请求方式
-	type : "POST",
-	//请求的媒体类型
-	contentType: "application/json;charset=UTF-8",
-	//请求地址
-	url : baseapiurl+"checkjunk/",
-	//数据，json字符串
-	data : JSON.stringify(req),
-	//请求成功
-	success : function(res) {
-		check_remove_recommendsearch(res,ztext);
-	},
-	//请求失败，包含具体的错误信息
-	error : function(e){
-		console.log(e.status);
-		console.log(e.responseText);
-	}
+                $.ajax({
+        type : "POST",
+        contentType: "application/json;charset=UTF-8",
+        url : baseapiurl+"checkjunk/",
+        data : JSON.stringify(req),
+        success : function(res) {
+                check_remove_recommendsearch(res,ztext);
+        },
+        error : function(e){
+                console.log(e.status);
+                console.log(e.responseText);
+        }
 });
 }
 var check_remove_recommendsearch=function(res,ztext){
-//console.log("got here");
-//console.log(res);
 if(res.toLowerCase()=="true"){
-	//console.log("go here");
-	//console.log(ztext);
 $("th").each(function(){
 if($(this).children("a").text()==ztext){
-	$(this).remove();
-	//console.log(ztext+"remvoe!");
+        $(this).remove();
 };
-//console.log(search_rec);
 });}
 };
 
 var remove_shits_recommendsearch=function(){
 $("th").each(function(){
 search_rec=$(this).children("a").text();
-//console.log(search_rec);
 zreq=new Object();
 zreq.text=search_rec;
 search_rec_ajaxcheck(zreq,search_rec);
-//console.log(search_rec);
 delete zreq;
 delete search_rec;
 });}
-///
-	var remove_shits=function(){
-		get_page_tittle();
-	};
-	setTimeout(function(){console.log("#####Eat your shits back,Baidu#####")},5000)
+        var remove_shits=function(){
+                get_page_tittle();
+        };
+        setTimeout(function(){console.log("#####Eat your shits back,Baidu#####")},5000)
     document.addEventListener("DOMSubtreeModified", remove_shits);
-	document.addEventListener("DOMSubtreeModified", remove_shits_recommendsearch);
-///
+        document.addEventListener("DOMSubtreeModified", remove_shits_recommendsearch);
 
 
 })();
